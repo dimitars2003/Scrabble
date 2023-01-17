@@ -30,6 +30,59 @@ void startGame() {
 
 void options() {
 
+  int choice = 0;
+  int newRecord = 0;
+
+  while (true) {
+    std::cout << std::endl << "Options: " << std::endl;
+    std::cout << "1. Change the number of letters the player gets" << std::endl;
+    std::cout << "2. Change the number of rounds played" << std::endl;
+    std::cout << "3. Return to Main menu" << std::endl;
+    std::cin >> choice;
+
+    if (choice < 1 || choice > 3) {
+      std::cout << "Invalid input. Please try again." << std::endl;
+      continue;
+    }
+
+    if (choice == 1) {
+      while (true) {
+        std::cout << "Enter new number of letters" << std::endl;
+        std::cin >> newRecord;
+
+        if (newRecord < 2) {
+          std::cout << "Invalid input. At least 2 letters needed. Please try again." << std::endl;
+          continue;
+        }
+
+        letterCounter = new int(newRecord);
+        std::cout << "Number of letters changed to: " << * letterCounter << std::endl;
+        break;
+      }
+    }
+
+    if (choice == 2) {
+      while (true) {
+        std::cout << "Enter new number of rounds" << std::endl;
+        std::cin >> newRecord;
+
+        if (newRecord < 2) {
+          std::cout << "Invalid input. At least 2 letters needed. Please try again." << std::endl;
+          continue;
+        }
+
+        roundCounter = new int(newRecord);
+        std::cout << "Number of rounds changed to: " << * roundCounter << std::endl;
+        break;
+      }
+    }
+
+    if (choice == 3) {
+      return;
+    }
+
+  }
+  return;
 }
 
 
