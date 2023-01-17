@@ -22,6 +22,64 @@ int * letterCounter = new int(10);
 int * roundCounter = new int(10);
 std::fstream dictionary;
 
+
+void startGame() {
+
+}
+
+
+void options() {
+
+}
+
+
+void addWord() {
+  dictionary.open("dictionary.txt", std::fstream::out | std::fstream::app);
+
+  char newWord[101] = {' '};
+  int temp = 0;
+  int wordLength = 0;
+
+  while (true) {
+    std::cout << "Enter the word you wish to add to the dictionary" << std::endl;
+    std::cin >> newWord;
+
+    if (newWord[100] < 122 && newWord[100] > 97) {
+      std::cout << "Invalid input. The word should have max 100 letters. Please try again." << std::endl;
+      continue;
+    }
+
+    if (newWord[1] > 122 || newWord[1] < 97) {
+      std::cout << "Invalid input. The word should have at least 2 letters. Please try again." << std::endl;
+      continue;
+    }
+
+    while (newWord[temp] <= 122 && newWord[temp] >= 97) {
+      wordLength++;
+      temp++;
+    }
+
+    break;
+  }
+
+  char toAdd[wordLength + 1] = {' '};
+  toAdd[wordLength] = '\0';
+
+  for (int i = 0; i < wordLength; i++) {
+
+    toAdd[i] = newWord[i];
+  }
+
+  for (int i = 0; i < wordLength; i++) {
+    std::cout << toAdd[i] << " ";
+  }
+  dictionary << toAdd << ':';
+  std::cout << "Word added. Returning to main menu" << std::endl;
+  dictionary.close();
+  return;
+}
+
+
 int main() {
 
   int choice = 0;
