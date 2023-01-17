@@ -29,9 +29,41 @@ char generateLetters() {
     return (char) r;
 }
 
+void printLetters(char toPrint[]) {
+    for (int i = 0; i < * letterCounter; i++) {
+        std::cout << toPrint[i];
+        if (i < * letterCounter - 1) {
+            std::cout << " ";
+        }
+        else {
+            std::cout << std::endl;
+        }
+    }
+}
+
 
 void startGame() {
 
+    int currentRound = 1;
+    int points = 0;
+
+    char letters[ * letterCounter];
+    char word[ * letterCounter] = {' '};
+
+
+    while (currentRound <= * roundCounter) {
+
+        std::cout << "Round " << currentRound << ". Available letters: ";
+        for (int i = 0; i < * letterCounter; i++) {
+            letters[i] = generateLetters();
+
+        }
+        printLetters(letters);
+
+        //game
+
+        currentRound++;
+    }
 }
 
 
@@ -47,48 +79,49 @@ void options() {
         std::cout << "3. Return to Main menu" << std::endl;
         std::cin >> choice;
 
-    if (choice < 1 || choice > 3) {
-        std::cout << "Invalid input. Please try again." << std::endl;
-        continue;
-    }
-
-    if (choice == 1) {
-        while (true) {
-            std::cout << "Enter new number of letters" << std::endl;
-            std::cin >> newRecord;
-
-        if (newRecord < 2) {
-            std::cout << "Invalid input. At least 2 letters needed. Please try again." << std::endl;
+        if (choice < 1 || choice > 3) {
+            std::cout << "Invalid input. Please try again." << std::endl;
             continue;
         }
 
-        letterCounter = new int(newRecord);
-        std::cout << "Number of letters changed to: " << * letterCounter << std::endl;
-        break;
-      }
-    }
+        if (choice == 1) {
+            while (true) {
+                std::cout << "Enter new number of letters" << std::endl;
+                std::cin >> newRecord;
 
-    if (choice == 2) {
-        while (true) {
-            std::cout << "Enter new number of rounds" << std::endl;
-            std::cin >> newRecord;
+                if (newRecord < 2) {
+                    std::cout << "Invalid input. At least 2 letters needed. Please try again." << std::endl;
+                    continue;
+                }
 
-        if (newRecord < 2) {
-            std::cout << "Invalid input. At least 2 letters needed. Please try again." << std::endl;
-            continue;
+                letterCounter = new int(newRecord);
+                std::cout << "Number of letters changed to: " << * letterCounter << std::endl;
+                break;
+            }
         }
 
-        roundCounter = new int(newRecord);
-        std::cout << "Number of rounds changed to: " << * roundCounter << std::endl;
-        break;
-      }
+        if (choice == 2) {
+            while (true) {
+                std::cout << "Enter new number of rounds" << std::endl;
+                std::cin >> newRecord;
+
+                if (newRecord < 2) {
+                    std::cout << "Invalid input. At least 2 letters needed. Please try again." << std::endl;
+                    continue;
+                }
+
+                roundCounter = new int(newRecord);
+                std::cout << "Number of rounds changed to: " << * roundCounter << std::endl;
+                break;
+            }
+        }
+
+        if (choice == 3) {
+            return;
+        }
+
     }
 
-    if (choice == 3) {
-        return;
-    }
-
-    }
     return;
 }
 
@@ -133,6 +166,7 @@ void addWord() {
     for (int i = 0; i < wordLength; i++) {
         std::cout << toAdd[i] << " ";
     }
+
     dictionary << toAdd << ':';
     std::cout << "Word added. Returning to main menu" << std::endl;
     dictionary.close();
