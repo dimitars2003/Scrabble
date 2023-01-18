@@ -46,10 +46,13 @@ void startGame() {
 
     int currentRound = 1;
     int points = 0;
-
+    int temp = 0;
     char letters[ * letterCounter];
     char word[ * letterCounter] = {' '};
+    int wordLength = 0;
 
+    int usedCounter = 0;
+    bool missingLetter = true;
 
     while (currentRound <= * roundCounter) {
 
@@ -58,9 +61,47 @@ void startGame() {
             letters[i] = generateLetters();
 
         }
+
         printLetters(letters);
 
+        while (wordLength == 0) {
+            std::cout << "If you want to change letters enter 0" << std::endl;
+            std::cin >> word;
+            if (word[0] == '0') {
+                for (int i = 0; i < * letterCounter; i++) {
+                    letters[i] = generateLetters();
+
+                }
+                std::cout << "Round " << currentRound << ". Available letters: ";
+                printLetters(letters);
+                continue;
+            }
+            for (int i = 0; i < * letterCounter; i++) {
+                if (word[i] > 123 || word[i] < 97) {
+                    break;
+                }
+            else {
+                wordLength++;
+            }
+      }
+            if (wordLength < 2) {
+
+                std::cout << "Invalid word. Please try again. Available letters: " << std::endl;
+                printLetters(letters);
+                wordLength = 0;
+                continue;
+            }
+
+        }
+
+        printLetters(word);
+
+
+
         //game
+
+
+
 
         currentRound++;
     }
