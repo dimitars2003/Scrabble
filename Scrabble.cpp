@@ -94,8 +94,113 @@ void startGame() {
 
         }
 
-        printLetters(word);
 
+        bool checkLetter = false;
+        bool hasToBreak = false;
+        bool isFound = false;
+
+        int usedLetters[ * letterCounter];
+        for (int i = 0; i < * letterCounter; i++) {
+            usedLetters[i] = -1;
+        }
+
+        while (true) {
+
+        for (int i = 0; i < wordLength; i++) {
+
+            if (wordLength == usedCounter) {
+                hasToBreak = true;
+                break;
+            }
+            for (int j = 0; j < * letterCounter; j++) {
+                if (word[i] == letters[j]) {
+
+                    while (usedLetters[temp] != -1) {
+                        if (j == usedLetters[temp]) {
+                            checkLetter = true;
+                            break;
+                        }
+                        temp++;
+                    }
+                    temp = 0;
+                    if (checkLetter) {
+                        checkLetter = false;
+                        continue;
+                    }
+                    else {
+                        usedLetters[usedCounter] = j;
+                        usedCounter++;
+                        missingLetter = false;
+                        isFound = true;
+                    }
+                }
+                if (isFound) {
+
+                    isFound = false;
+                    break;
+                }
+            }
+
+            if (missingLetter) {
+
+                wordLength = 0;
+                dictionary.close();
+                for (int t = 0; t < usedCounter; t++) {
+                usedLetters[t] = -1;
+            }
+            usedCounter = 0;
+            std::cout << "Invalid word. Please try again. Available letters: " << std::endl;
+            printLetters(letters);
+
+            while (wordLength == 0) {
+                std::cout << "If you want to change letters enter 0" << std::endl;
+                std::cin >> word;
+                if (word[0] == '0') {
+                    for (int i = 0; i < * letterCounter; i++) {
+                        letters[i] = generateLetters();
+
+                    }
+                    std::cout << "Round " << currentRound << ". Available letters: ";
+                    printLetters(letters);
+                    continue;
+                }
+                for (int i = 0; i < * letterCounter; i++) {
+                    if (word[i] > 123 || word[i] < 97) {
+
+                        break;
+                    }
+                    else {
+                        wordLength++;
+                    }
+                }
+                if (wordLength < 2) {
+
+                    std::cout << "Invalid word. Please try again. Available letters: " << std::endl;
+                    printLetters(letters);
+                    wordLength = 0;
+                    missingLetter=true;
+                    continue;
+                }
+
+            }
+
+            temp=0;
+            isFound= true;
+            break;
+            }
+            else {
+
+                missingLetter = true;
+            }
+        }
+        if(isFound){
+            isFound=false;
+            continue;
+        }
+        if (hasToBreak) {
+            hasToBreak = false;
+            break;
+        }
 
 
         //game
@@ -107,7 +212,7 @@ void startGame() {
     }
 }
 
-
+}
 void options() {
 
     int choice = 0;
