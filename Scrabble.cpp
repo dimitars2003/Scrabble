@@ -203,16 +203,139 @@ void startGame() {
         }
 
 
-        //game
+        int counterRight = 0;
+      temp = 0;
+      int dictionaryLength = 0;
+      bool hasWord = false;
+      char dictionaryCheck[101] = {' '};
+      dictionaryCheck[100] = '\0';
+      std::fstream dictionary;
+      dictionary.open("dictionary.txt", std::fstream::in);
+
+      if (dictionary.is_open()) {
+
+        while (!dictionary.eof()) {
+
+          dictionary >> dictionaryCheck[temp];
+
+          if (dictionaryCheck[temp] == ':') {
+            if (wordLength != temp) {
+
+              for (int i = 0; i < temp; i++) {
+                dictionaryCheck[i] = ' ';
+              }
+              dictionaryCheck[100] = '\0';
+              temp = 0;
+              counterRight = 0;
+              continue;
+            }
+            for (int i = 0; i < temp; i++) {
+              if (dictionaryCheck[i] != word[i]) {
+                for (int i = 0; i < temp; i++) {
+                  dictionaryCheck[i] = ' ';
+                }
+                dictionaryCheck[100] = '\0';
+                temp = 0;
+                counterRight = 0;
+                break;
+              } else {
+                counterRight++;
+              }
+
+            }
+
+            if (temp == 0) {
+              continue;
+            }
+            if (counterRight == temp) {
+
+              hasWord = true;
+              break;
+            }
+          }
+
+          temp++;
+          dictionaryLength++;
+        }
 
 
+      }
+      if (!hasWord) {
+        std::cout << "Invalid word. Please try again. Available letters: " << std::endl;
+        wordLength = 0;
+        for (int t = 0; t < usedCounter; t++) {
+          usedLetters[t] = -1;
+        }
+        usedCounter = 0;
+        printLetters(letters);
+        counterRight=0;
+        hasWord = false;
+        dictionaryLength = 0;
+        for (int i = 0; i < temp; i++) {
+          dictionaryCheck[i] = ' ';
+        }
+        dictionaryCheck[100] = '\0';
+        temp = 0;
+        while (wordLength == 0) {
+          std::cout << "If you want to change letters enter 0" << std::endl;
+          std::cin >> word;
+          if (word[0] == '0') {
+            for (int i = 0; i < * letterCounter; i++) {
+              letters[i] = generateLetters();
 
+            }
+            std::cout << "Round " << currentRound << ". Available letters: ";
+            printLetters(letters);
+            continue;
+          }
+          for (int i = 0; i < * letterCounter; i++) {
+            if (word[i] > 123 || word[i] < 97) {
+
+              break;
+            } else {
+              wordLength++;
+
+            }
+          }
+          if (wordLength < 2) {
+
+            std::cout << "Invalid word. Please try again. Available letters: " << std::endl;
+            printLetters(letters);
+            wordLength = 0;
+            dictionary.close();
+            continue;
+                        }
+                    }
+                continue;
+            }
+            hasWord = false;
+            dictionary.close();
+        }
+
+
+        temp = 0;
+        while (usedLetters[temp] != -1) {
+            usedLetters[temp] = -1;
+            temp++;
+            points++;
+
+        }
+        for (int i = 0; i < wordLength; i++) {
+            word[i] = ' ';
+        }
+        wordLength = 0;
+        temp = 0;
+        usedCounter = 0;
+        std::cout << "Points: " << points << std::endl;
 
         currentRound++;
+        std::cout<<std::endl;
     }
-}
+    std::cout<<std::endl<<"Total points: " << points<<std::endl;;
 
 }
+
+
 void options() {
 
     int choice = 0;
