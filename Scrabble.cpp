@@ -320,11 +320,12 @@ void startGame()
         std::cout << "Points: " << points << std::endl;
 
         currentRound++;
-        std::cout << std::endl;
+
     }
     std::cout << std::endl
-              << "Total points: " << points << std::endl;
-    ;
+              << "Total points: " << points <<". Returning to Main menu"
+              << std::endl <<std::endl;
+
 }
 
 void options()
