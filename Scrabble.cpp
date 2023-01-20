@@ -393,6 +393,7 @@ void addWord()
     char newWord[101] = { ' ' };
     int temp = 0;
     int wordLength = 0;
+    bool toBreak = false;
 
     while (true) {
         std::cout << "Enter the word you wish to add to the dictionary" << std::endl;
@@ -407,10 +408,30 @@ void addWord()
             std::cout << "Invalid input. The word should have at least 2 letters. Please try again." << std::endl;
             continue;
         }
+        if(newWord[temp]>122||newWord[temp]<97){
+            wordLength=0;
+            temp=0;
+            std::cout << "Invalid input. Invalid letter. Please try again." << std::endl;
+            continue;
+        }
 
         while (newWord[temp] <= 122 && newWord[temp] >= 97) {
+            if(newWord[temp+1]>122||newWord[temp+1]<97){
+                    if(newWord[temp+1]!='\0'){
+                        wordLength=0;
+                        temp=0;
+                        std::cout << "Invalid input. Invalid letter. Please try again." << std::endl;
+                        toBreak = true;
+                        break;
+
+                    }
+            }
             wordLength++;
             temp++;
+        }
+        if(toBreak){
+            toBreak=false;
+            continue;
         }
 
         break;
