@@ -330,7 +330,7 @@ void startGame()
 void options()
 {
 
-    int choice = 0;
+    char choice = '0';
     int newRecord = 0;
 
     while (true) {
@@ -341,12 +341,12 @@ void options()
         std::cout << "3. Return to Main menu" << std::endl;
         std::cin >> choice;
 
-        if (choice < 1 || choice > 3) {
+        if (choice < '1' || choice > '3') {
             std::cout << "Invalid input. Please try again." << std::endl;
             continue;
         }
 
-        if (choice == 1) {
+        if (choice == '1') {
             while (true) {
                 std::cout << "Enter new number of letters" << std::endl;
                 std::cin >> newRecord;
@@ -362,7 +362,7 @@ void options()
             }
         }
 
-        if (choice == 2) {
+        if (choice == '2') {
             while (true) {
                 std::cout << "Enter new number of rounds" << std::endl;
                 std::cin >> newRecord;
@@ -378,7 +378,7 @@ void options()
             }
         }
 
-        if (choice == 3) {
+        if (choice == '3') {
             return;
         }
     }
@@ -438,7 +438,7 @@ int main()
 {
 
     srand((unsigned)time(NULL));
-    int choice = 0;
+    char choice = '0';
 
     while (true) {
         std::cout << "Main menu" << std::endl;
@@ -448,27 +448,27 @@ int main()
         std::cout << "4. Exit" << std::endl;
         std::cin >> choice;
 
-        if (choice < 1 || choice > 4) {
+        if (choice < '1' || choice > '4') {
             std::cout << "Invalid input. Please try again." << std::endl;
             continue;
         }
 
-        if (choice == 1) {
+        if (choice == '1') {
             std::cout << std::endl;
             startGame();
         }
 
-        if (choice == 2) {
+        if (choice == '2') {
             options();
             std::cout << std::endl;
             continue;
         }
 
-        if (choice == 3) {
+        if (choice == '3') {
             addWord();
         }
 
-        if (choice == 4) {
+        if (choice == '4') {
             break;
         }
     }
